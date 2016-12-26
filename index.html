@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+        <title>Tre Malenkii Slova</title>
+        <!-- Favicons -->
+        <link rel="icon" type="image/png" href="icons/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="icons/favicon-16x16.png" sizes="16x16" />
+        <!-- App manifest -->
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="description" content="Tre Malenkii Slova | Progressive Web Audio App">
+        <!-- CSS Reset -->
+        <link rel="stylesheet" href="bower_components/skeleton/css/normalize.css">
+        <!-- Skeleton CSS -->
+        <link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css">
+        <style media="screen">
+        body {
+            font-family: Roboto, Helvetica, Trebuchet, Arial, sans-serif;
+            background: #ECEFF1;
+            color: rgba(0,0,0,0.87);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 100vw;
+            height: 100%;
+        }
+        a {
+            color: rgb(3,155,229);
+        }
+        #sound-parameters {
+            max-width: 95%;
+            margin: auto;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
+            border-radius: 2px;
+            background: white;
+            padding: 16px 24px;
+            display: flex;
+            flex-direction: column;
+        }
+        #sound-parameters h1 {
+            font-size: 22px;
+            font-weight: 500;
+            text-align: center;
+            margin: 0 0 16px;
+        }
+        #sound-parameters p {
+            font-weight: 300;
+            line-height: 100%;
+        }
+        #sound-parameters ul {
+            list-style: none;
+            margin: 16px 0 0;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        #sound-parameters li form > label {
+            display: inline-block;
+            padding: 8px;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 300;
+            color: rgb(90, 170, 224);
+            border-radius: 3px;
+            font-size: 14px;
+            max-width: 100%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .six {
+            color: rgb(90, 170, 224);
+        }
+        .label {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .label p {
+            height: 0.75em;
+            margin-bottom: 0.5em;
+        }
+        input[type=range]{
+            -webkit-appearance: none;
+            padding: 0;
+        }
+        input[type=range]:active,:focus {
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 300px;
+            height: 5px;
+            background: #ddd;
+            border: none;
+            border-radius: 3px;
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-thumb {
+        	-webkit-appearance: none;
+            box-sizing: content-box;
+            border: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background-color: rgb(90, 170, 224);
+            margin-top: -4px;
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-thumb:active {
+            height: 20px;
+            width: 20px;
+            margin-top: -6px;
+        }
+        input[type=range]::-moz-range-thumb {
+        	/* again your thumb styles */
+            box-sizing: content-box;
+            border: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background-color: rgb(90, 170, 224);
+            outline: none;
+        }
+        input[type=range]::-moz-range-thumb:active {
+            height: 20px;
+            width: 20px;
+            margin-top: -6px;
+        }
+        input[type=range]::-ms-thumb { /* should come after -webkit- */
+        	/* again your thumb styles */
+        	/* may require different margins */
+            box-sizing: content-box;
+            border: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background-color: rgb(90, 170, 224);
+            outline: none;
+        }
+        input[type=range]::-ms-thumb:active {
+            height: 20px;
+            width: 20px;
+            margin-top: -6px;
+        }
+        #logo {
+            width: 1em;
+            height: 1em;
+        }
+        </style>
+    </head>
+    <body>
+        <!-- Fixed title bar -->
+        <div class="row" style="color:rgb(90,170,224);margin-top:5px;width:100%;z-index:1;position:fixed;top:0;text-align:center">
+            <h1>маленьких <span><img src="icons/tre.png" alt="Tre" id="logo"></span> слова</h1>
+        </div>
+        <div style="margin-bottom:2.5em"></div>
+        <!-- Canvas sound visualisation -->
+        <div id="visualisation" class="row" style="display:flex;justify-content:center">
+            <canvas id="sound-visualisation" class="twelve column"></canvas>
+        </div>
+        <!-- Controls container -->
+        <div id="sound-parameters" class="container">
+            <ul class="twelve column">
+                <li>
+                    <form>
+                        <div class="row" style="display:flex;justify-content:center">
+                            <button id="startstop" type="button" style="color:rgb(90, 170, 224)" onclick="this.innerText = init()">Start</button>
+                        </div>
+                        <div class="row">
+                            <div class="six columns">
+                                <label for="choosesound">Which little words?</label>
+                                <select class="u-full-width" id="choosesound">
+                                    <option value="iloveyou.wav">Тебя Я люблю</option>
+                                    <option value="iwantyou.wav">Тебя Я хочу</option>
+                                    <option value="imissyou.wav">Я скучаю по тебе</option>
+                                    <option value="youresobeautiful.wav">Ты такая красивая</option>
+                                    <option value="youremybaby.wav">Ты моя малышка</option>
+                                    <option value="youremyangel.wav">Ты мой ангел</option>
+                                </select>
+                            </div>
+                            <div class="six columns">
+                                <label for="choosestage">Which setting?</label>
+                                <select class="u-full-width" id="choosestage">
+                                    <option value="cavern.wav">Cavern</option>
+                                    <option value="tunnel.wav">Tunnel</option>
+                                    <option value="metro.wav">Metro</option>
+                                    <option value="library.wav">Library</option>
+                                    <option value="beach.wav">Beach</option>
+                                    <option value="cathedral.wav">Cathedral</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="six columns">Volume:
+                                <span class="label"><p id="volume">50</p><p>%</p></span>
+                                <input id="choosevolume" type="range" name="choosevolume" for="volume" min="0" max="1" value="0.5" step="0.05" oninput="soundvolume=event.target.value;
+                                document.getElementById('volume').innerText=Math.round(soundvolume*100);" />
+                            </label>
+                            <label class="six columns">Speed:
+                                <span class="label"><p id="speed">100</p><p>%</p></span>
+                                <input id="choosespeed" type="range" name="choosespeed" for="speed" min="0" max="2" value="1" step="0.05"  oninput="soundspeed=event.target.value;
+                                document.getElementById('speed').innerText=Math.round(soundspeed*100);" />
+                            </label>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js').catch(function (error) {
+                    console.error(error);
+                });
+            }
+        </script>
+        <script src="tremalenkislova.js" charset="utf-8"></script>
+    </body>
+</html>
