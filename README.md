@@ -1,1 +1,1 @@
-Progressive offline-first web app using web audio api to play back and distort sound and display a frequency wave. Uses service worker and an app manifest for offline-first functionality on user's devices. 
+Progressive offline-first web app using web audio api to play back and distort sound and display a frequency wave with the web canvas api. Uses service worker and an app manifest for offline-first functionality on user's devices. 
