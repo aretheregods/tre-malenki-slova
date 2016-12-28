@@ -68,7 +68,7 @@ function stageGet(soundfile) {
 
                 var stageData = xhr.response;
 
-                audioContext.decodeAudioData(stageData, function(buffer) {
+                audioContext.decodeAudioData(stageData, function soundSecondary(buffer) {
 
                     let stageBuffer = buffer;
 
@@ -254,7 +254,7 @@ function soundVisualisation(){
     };
 
     // Obviously call the function to draw the stuff
-    draw();
+    return draw();
 
 }
 
