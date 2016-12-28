@@ -4,7 +4,7 @@
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioContext = new AudioContext();
 
-// Names of main sound buffer
+// Name of main sound buffer
 var source;
 
 // Assign 0 time
@@ -42,7 +42,6 @@ const soundStage = document.getElementById("choosestage");
 const soundVolume = document.getElementById("choosevolume");
 const soundSpeed = document.getElementById("choosespeed");
 const soundStartStop = document.getElementById("startstop");
-const soundVisualiserChoice = document.getElementById("choosevisualiser");
 
 // Whether sound is currently playing -->
 // Will toggle
@@ -121,7 +120,7 @@ function soundGet(soundfile) {
         // GET sound user chose
         xhr.open( 'GET', `sounds/${soundfile}`, true );
 
-        // Set sound type for buffer
+        // Set data type to buffer
         xhr.responseType = 'arraybuffer';
 
         // Check whether request was successful
@@ -133,6 +132,8 @@ function soundGet(soundfile) {
 
                 audioContext.decodeAudioData( soundData, function soundMain(buffer) {
 
+                    // Instantiate new buffer on every call
+                    // For start--stop--etc
                     let newBuffer = buffer
 
                     source.buffer = newBuffer
