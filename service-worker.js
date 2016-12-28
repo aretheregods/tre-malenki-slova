@@ -1,6 +1,6 @@
 importScripts('/bower_components/sw-toolbox/sw-toolbox.js');
 
-// Version 3.2.8
+// Version 3.3.1
 
 toolbox.precache(['/sounds/iloveyou.wav',
 				  '/sounds/iwantyou.wav',
