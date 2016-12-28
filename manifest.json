@@ -1,11 +1,11 @@
 {
-    "name": "Tre Malenkii Slova",
-    "short_name": "Slova",
-    "start_url": "/index.html",
+    "name": "Tre Malenki Slova",
+    "short_name": "3Slovechki",
+    "start_url": ".",
     "display": "standalone",
     "icons": [
         {
-            "src": "icons/tre.png"
+            "src": "icons/tre.png",
             "sizes": "500x500",
             "type": "image/png"
         }

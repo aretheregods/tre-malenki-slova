@@ -3,17 +3,18 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
-        <title>Tre Malenkii Slova</title>
+        <meta name="mobile-web-app-capable" content="yes">
+        <title>Tre Malenki Slova</title>
         <!-- Favicons -->
         <link rel="icon" type="image/png" href="icons/favicon-32x32.png" sizes="32x32" />
         <link rel="icon" type="image/png" href="icons/favicon-16x16.png" sizes="16x16" />
         <!-- App manifest -->
         <link rel="manifest" href="/manifest.json" />
-        <meta name="description" content="Tre Malenkii Slova | Progressive Web Audio App">
+        <meta name="description" content="Tre Malenki Slova | Offline-First Progressive Web Audio App">
         <!-- CSS Reset -->
-        <link rel="stylesheet" href="bower_components/skeleton/css/normalize.css">
+        <link rel="preload" href="bower_components/skeleton/css/normalize.css">
         <!-- Skeleton CSS -->
-        <link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css">
+        <link rel="preload" href="bower_components/skeleton/css/skeleton.css">
         <style media="screen">
         body {
             font-family: Roboto, Helvetica, Trebuchet, Arial, sans-serif;
@@ -152,12 +153,12 @@
     </head>
     <body>
         <!-- Fixed title bar -->
-        <div class="row" style="color:rgb(90,170,224);margin-top:5px;width:100%;z-index:1;position:fixed;top:0;text-align:center">
-            <h1>маленьких <span><img src="icons/tre.png" alt="Tre" id="logo"></span> слова</h1>
+        <div class="row" style="background-color:#ECEFF1;color:rgb(90,170,224);margin-top:5px;width:100%;z-index:1;position:fixed;top:0;text-align:center">
+            <h1>Маленьких <span><img src="icons/tre.png" alt="Tre" id="logo"></span> Слова</h1>
         </div>
         <div style="margin-bottom:2.5em"></div>
         <!-- Canvas sound visualisation -->
-        <div id="visualisation" class="row" style="display:flex;justify-content:center">
+        <div id="visualisation" class="row twelve column" style="display:flex;justify-content:center">
             <canvas id="sound-visualisation" class="twelve column"></canvas>
         </div>
         <!-- Controls container -->
@@ -209,10 +210,34 @@
             </ul>
         </div>
         <script type="text/javascript">
+            "use strict";
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/service-worker.js').catch(function (error) {
-                    console.error(error);
-                });
+                navigator.serviceWorker.register('/service-worker.js')
+                .then(function serviceUpdate (reg) {
+                    reg.onupdatefound = function(){
+                        var installingWorker = reg.installing;
+                        installingWorker.onstatechange = function() {
+                            switch (installingWorker.state) {
+
+                                case 'installed':
+                                    if (navigator.serviceWorker.controller) {
+                                        // Do something interesting here -- message or whatever.
+                                        return 'New or updated content is available';
+                                    } else {
+                                        // Also do something interesting here -- message or whatever.
+                                        return 'Content is now available offline!';
+                                    }
+                                    break;
+
+                                case 'redundant':
+                                    // Possibly do something clever
+                                    return 'The installing service worker became redundant.';
+                                    break;
+                            }
+                        };
+                    };
+                })
+                .catch(function serviceError(error){return `There's been the following error: ${error}`});
             }
         </script>
         <script src="tremalenkislova.js" charset="utf-8"></script>

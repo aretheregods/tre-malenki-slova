@@ -5,7 +5,7 @@ const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioContext = new AudioContext();
 
 // Names of main sound buffer
-var source
+var source;
 
 // Assign 0 time
 const startTime = audioContext.currentTime;
@@ -33,7 +33,7 @@ sounddata.minDecibels = -140;
 sounddata.maxDecibels = 0;
 sounddata.smoothingTimeConstant = 0.85;
 
-const frequencies = new Uint8Array(sounddata.frequencyBinCount)
+const frequencies = new Uint8Array(sounddata.frequencyBinCount);
 sounddata.getByteTimeDomainData(frequencies);
 
 // Get fields in html
@@ -194,9 +194,10 @@ function soundGet(soundfile) {
     })
 }
 
-// Connect sound profile to canvas
 function soundVisualisation(){
 
+    // Connect sound profile to canvas
+    
     // Set dimensions to container size
     let WIDTH = soundVisualizer.width;
     let HEIGHT = soundVisualizer.height;
@@ -247,7 +248,7 @@ function soundVisualisation(){
             x += sliceWidth;
         }
 
-        // Actually set line position  context to data stream
+        // Actually set line position context to data stream
         canvasContext.lineTo(soundVisualizer.width, soundVisualizer.height/2);
         canvasContext.stroke();
     };
@@ -261,7 +262,7 @@ function init() {
 
     isPlaying = !isPlaying
 
-    // If state is stop return start && vice-a-versa
+    // If state is 'stop' return 'start' && vice-a-versa
     if (isPlaying) {
 
         soundGet(soundChoice.value)
