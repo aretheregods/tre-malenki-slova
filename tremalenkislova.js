@@ -14,7 +14,7 @@ const startTime = audioContext.currentTime;
 const volume = audioContext.createGain();
 var stage = audioContext.createConvolver();
 const compressor = audioContext.createDynamicsCompressor();
-// Volume for convolver -- just in case
+// Volume for convolver -- just in case #future
 const stageVolume = audioContext.createGain();
 
 // Reference canvas api for visualisation
@@ -84,7 +84,7 @@ function stageGet(soundfile) {
                     stage.normalize = true
                     stageVolume.gain.value = 1
 
-                }, function(e){"Error with decoding audio data" + e.err});
+                }, function(e){return `Error with decoding audio data ${e.err}`});
 
             } else {
 
@@ -198,7 +198,7 @@ function soundGet(soundfile) {
 function soundVisualisation(){
 
     // Connect sound profile to canvas
-    
+
     // Set dimensions to container size
     let WIDTH = soundVisualizer.width;
     let HEIGHT = soundVisualizer.height;
