@@ -1,8 +1,8 @@
 "use strict";
 
 // Reference audiocontext api
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-const audioContext = new AudioContext();
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+const audioContext = new AudioCtx();
 
 // Name of main sound buffer
 var source;

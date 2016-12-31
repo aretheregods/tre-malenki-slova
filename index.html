@@ -154,9 +154,9 @@
     </head>
     <body>
         <!-- Fixed title bar -->
-        <div class="row" style="color:rgb(90,170,224);margin-top:5px;width:100%;z-index:1;position:fixed;top:0;text-align:center;max-height:10vw">
+        <header class="row" style="color:rgb(90,170,224);margin-top:5px;width:100%;z-index:1;position:fixed;top:0;text-align:center;max-height:10vw">
             <h1>Маленьких <span><img src="icons/tre.png" alt="Tre" id="logo"></span> Слова</h1>
-        </div>
+        </header>
         <div style="margin-bottom:2.5em"></div>
         <!-- Canvas sound visualisation -->
         <div id="visualisation" class="row container" style="display:flex;justify-content:center">
@@ -242,6 +242,6 @@
                 .catch(function serviceError(error){return `There's been the following error: ${error}`});
             }
         </script>
-        <script async src="tremalenkislova.js" charset="utf-8"></script>
+        <script async defer src="tremalenkislova.js" charset="utf-8"></script>
     </body>
 </html>
