@@ -1,0 +1,20 @@
+{
+  "name": "tremalenkislovaw",
+  "version": "2.0.0",
+  "description": "SRC directory for Tre Malenki Slova",
+  "main": "src/scripts/components/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aretheregods/tre-malenki-slova/tree/improvements.git"
+  },
+  "keywords": [
+    "Vanilla JavaScript",
+    "JavaScript",
+    "Closure"
+  ],
+  "author": "Me",
+  "license": "MIT"
+}
